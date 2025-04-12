@@ -2,10 +2,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import DashboardScreen from './dashboard/dashboard.screen';
-import SettingsScreen from './settings/settings.screen';
 import {Navbar} from 'components/navigators/navbar.component';
 import Mapas from './mapas/mapas.screen';
 import ReportesLayout from './reportes/layout';
+import ProfileScreen from './profile/profile.screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,13 +65,13 @@ const HomeTabNavigator = () => {
                     }}
                 />
                 <Tab.Screen
-                    name="Settings"
-                    component={SettingsScreen}
+                    name="Profile"
+                    component={ProfileScreen}
                     options={{
-                        tabBarLabel: 'Configuración',
+                        tabBarLabel: 'Perfil',
                         tabBarIcon: ({ focused, color, size }: any) => (
                             <Ionicons
-                                name={focused ? 'settings' : 'settings-outline'}
+                                name={focused ? 'person-circle' : 'person-circle-outline'}
                                 size={size}
                                 color={color}
                             />
