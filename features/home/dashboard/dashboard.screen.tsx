@@ -1,14 +1,28 @@
+import { useFocusEffect } from '@react-navigation/native';
 import AreaChartComponent from 'components/charts/areaChart.component';
 import PieChartComponent from 'components/charts/pieChart.component';
 import { Google_FormularioVotantes } from 'components/forms/votantesGoogleForm.component';
-import { useState } from 'react';
+import LoadingComponent from 'components/loading/loading.component';
+import { useCallback, useEffect, useState } from 'react';
 import { Dimensions, Pressable, ScrollView, Text, View } from 'react-native';
 
 const DashboardScreen = () => {
     const [registerActive, setRegisterActive] = useState<boolean>(false);
+    const [loading, setLoading] = useState(true);
+
+    useFocusEffect(
+        useCallback(() => {
+            setLoading(true);
+            const timeout = setTimeout(() => setLoading(false), 2000);
+
+            return () => clearTimeout(timeout);
+        }, [])
+    );
+
+    if (loading) return <LoadingComponent />;
 
 
-    if (registerActive){
+    if (registerActive) {
         return <Google_FormularioVotantes closePress={() => setRegisterActive(false)} />
     }
 
@@ -26,8 +40,8 @@ const DashboardScreen = () => {
                 <Text className='text-sm font-bold text-gray-700'>
                     Aquí puedes registrar a los votantes para el próximo evento electoral. Asegúrate de ingresar la información correctamente.
                 </Text>
-                <Pressable 
-                    className='bg-blue-600 w-11/12 py-2 rounded-lg shadow-lg' 
+                <Pressable
+                    className='bg-blue-600 w-11/12 py-2 rounded-lg shadow-lg'
                     onPress={() => setRegisterActive(true)}
                 >
                     <Text className='text-lg text-center text-white font-bold'>Registrar votantes</Text>

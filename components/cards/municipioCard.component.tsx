@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { IMunicipio } from 'interfaces/municipio.interface';
 import { View, Text, Pressable } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
@@ -22,8 +23,14 @@ export const MunicipioCard = ({ municipioData }: Props) => {
         ? poblacionParticipe / poblacion
         : 0;
 
+    const navigation = useNavigation();
+
+    const handleNavigate = () => {
+        navigation.navigate('UniqueMunicipio', { municipio: municipioData });
+    };
+
     return (
-        <Pressable onPress={() => console.log({ municipioData })} className='bg-blue-100 p-1 flex-row h-48 w-11/12 rounded-2xl justify-center items-center mx-auto mt-5 animate-fade-in'>
+        <Pressable onPress={handleNavigate} className='bg-blue-100 p-1 flex-row h-48 w-11/12 rounded-2xl justify-center items-center mx-auto mt-5 animate-fade-in'>
             <View className='bg-blue-300 w-1/2 h-full rounded-2xl justify-center gap-2 items-center animate-fade-in'>
                 <Text className='text-black text-2xl font-bold animate-fade-in'>{municipioData.municipio}</Text>
                 <View className='flex-col px-2 gap-2 justify-between items-start w-full mt-4 animate-fade-in'>

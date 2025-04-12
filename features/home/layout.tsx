@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons';
 import DashboardScreen from './dashboard/dashboard.screen';
 import SettingsScreen from './settings/settings.screen';
-import Municipios from './municipios/municipios.screen';
 import {Navbar} from 'components/navigators/navbar.component';
 import Mapas from './mapas/mapas.screen';
+import ReportesLayout from './reportes/layout';
 
 const Tab = createBottomTabNavigator();
 
@@ -51,13 +51,13 @@ const HomeTabNavigator = () => {
                     }}
                 />
                 <Tab.Screen
-                    name="Municipios"
-                    component={Municipios}
+                    name="ReportesLayout"
+                    component={ReportesLayout}
                     options={{
-                        tabBarLabel: 'Municipios',
+                        tabBarLabel: 'Reportes',
                         tabBarIcon: ({ focused, color, size }: any) => (
                             <Ionicons
-                                name={focused ? 'trail-sign' : 'trail-sign-outline'}
+                                name={focused ? 'folder-open' : 'folder-open-outline'}
                                 size={size}
                                 color={color}
                             />

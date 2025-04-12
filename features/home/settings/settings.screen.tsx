@@ -1,9 +1,23 @@
-import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import LoadingComponent from 'components/loading/loading.component';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Button, Pressable } from 'react-native';
 import useAuthStore from 'store/auth/auth.store';
 
 const SettingsScreen = () => {
     const {logout} = useAuthStore();
+    const [loading, setLoading] = useState(true);
+
+    useFocusEffect(
+            useCallback(() => {
+                setLoading(true);
+                const timeout = setTimeout(() => setLoading(false), 2000);
+    
+                return () => clearTimeout(timeout);
+            }, [])
+        );
+
+    if (loading) return <LoadingComponent />;
 
     return (
         <View className="flex-1 justify-center items-center bg-white animate-fade-in">

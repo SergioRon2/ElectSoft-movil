@@ -1,7 +1,22 @@
+import { useFocusEffect } from '@react-navigation/native';
+import LoadingComponent from 'components/loading/loading.component';
 import { Map } from 'components/maps/map.component';
+import { useCallback, useEffect, useState } from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 
 const Mapas = () => {
+    const [loading, setLoading] = useState(true);
+
+    useFocusEffect(
+            useCallback(() => {
+                setLoading(true);
+                const timeout = setTimeout(() => setLoading(false), 2000);
+    
+                return () => clearTimeout(timeout);
+            }, [])
+        );
+
+    if (loading) return <LoadingComponent />;
 
     return (
         <View className='h-full animate-fade-in'>

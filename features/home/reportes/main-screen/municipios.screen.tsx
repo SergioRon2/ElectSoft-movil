@@ -1,9 +1,23 @@
+import { useFocusEffect } from '@react-navigation/native';
 import { MunicipioCard } from 'components/cards/municipioCard.component';
+import LoadingComponent from 'components/loading/loading.component';
 import { IMunicipio } from 'interfaces/municipio.interface';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 
 const Municipios = () => {
+    const [loading, setLoading] = useState(true);
+
+    useFocusEffect(
+            useCallback(() => {
+                setLoading(true);
+                const timeout = setTimeout(() => setLoading(false), 2000);
+    
+                return () => clearTimeout(timeout);
+            }, [])
+        );
+
+    if (loading) return <LoadingComponent />;
 
     const municipios: IMunicipio[] = [
         {
